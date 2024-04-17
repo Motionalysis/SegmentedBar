@@ -78,7 +78,7 @@ Protected Class BarObject
 		Private ParentWindow As DesktopWindow
 	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h21
+	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
 			  mPercentage = Secs/Timeframe
@@ -91,7 +91,7 @@ Protected Class BarObject
 			  mPercentage = value
 			End Set
 		#tag EndSetter
-		Private Percentage As Double
+		Percentage As Double
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0

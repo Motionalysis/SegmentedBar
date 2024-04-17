@@ -9,6 +9,7 @@ Class=ProcedureBarCanvas;ProcedureBarCanvas.xojo_code;&h0000000003E5BC35;&h00000
 BuildSteps=Build Automation;Build Automation.xojo_code;&h000000001AC547FF;&h0000000000000000;false
 Class=BarObject;BarObject.xojo_code;&h000000003FB4FF4E;&h0000000000000000;false
 Class=ColorSelect;ColorSelect.xojo_code;&h00000000666C3FFF;&h0000000000000000;false
+Class=doubleclickLabel;doubleclickLabel.xojo_code;&h000000002AA02FFF;&h0000000000000000;false
 DefaultWindow=wndMain
 AppMenuBar=MainMenuBar
 MajorVersion=1

@@ -31,6 +31,7 @@ Begin DesktopWindow wndMain
       AllowTabs       =   False
       Backdrop        =   0
       Background      =   0
+      barsecs         =   3600
       Enabled         =   True
       Height          =   75
       Index           =   -2147483648
@@ -40,7 +41,6 @@ Begin DesktopWindow wndMain
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   True
-      mLastX          =   0
       Scope           =   0
       TabIndex        =   0
       TabPanelIndex   =   0
@@ -348,7 +348,7 @@ Begin DesktopWindow wndMain
       Visible         =   True
       Width           =   75
    End
-   Begin DesktopLabel Label4
+   Begin doubleclickLabel lblBarVal
       AllowAutoDeactivate=   True
       Bold            =   False
       Enabled         =   True
@@ -365,7 +365,7 @@ Begin DesktopWindow wndMain
       LockRight       =   False
       LockTop         =   True
       Multiline       =   False
-      Scope           =   2
+      Scope           =   0
       Selectable      =   False
       TabIndex        =   10
       TabPanelIndex   =   0
@@ -520,6 +520,29 @@ Begin DesktopWindow wndMain
       Visible         =   True
       Width           =   80
    End
+   Begin DesktopUpDownArrows UpDownArrows1
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowTabStop    =   True
+      Enabled         =   True
+      Height          =   23
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   217
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Scope           =   0
+      TabIndex        =   15
+      TabPanelIndex   =   0
+      Tooltip         =   ""
+      Top             =   160
+      Transparent     =   False
+      Visible         =   True
+      Width           =   13
+   End
 End
 #tag EndDesktopWindow
 
@@ -536,22 +559,22 @@ End
 		  lbProcs.AddRow("duhhh")
 		  var b as new BarObject(ProcedureBarCanvas1,565,&c61a5c2,"duhhh")
 		  lbProcs.RowTagAt(lbProcs.LastAddedRowIndex)=b
-		  ProcedureBarCanvas1.MakeNewBar(2,348,&c2c7da0,"aderrr")
+		  ProcedureBarCanvas1.MakeNewBar(2,648,&c2c7da0,"aderrr")
 		  lbProcs.AddRow("aderrr")
-		  b= new BarObject(ProcedureBarCanvas1,348,&c2c7da0,"aderrr")
+		  b= new BarObject(ProcedureBarCanvas1,648,&c2c7da0,"aderrr")
 		  lbProcs.RowTagAt(lbProcs.LastAddedRowIndex)=b
 		  ProcedureBarCanvas1.MakeNewBar(3,866,&c2a6f97,"doiee")
 		  lbProcs.AddRow("doiee")
 		  b= new BarObject(ProcedureBarCanvas1,866,&c2a6f97,"doiee")
 		  lbProcs.RowTagAt(lbProcs.LastAddedRowIndex)=b
-		  ProcedureBarCanvas1.MakeNewBar(1,615,&c468faf,"aderba")
+		  ProcedureBarCanvas1.MakeNewBar(1,515,&c468faf,"aderba")
 		  lbProcs.AddRow("aderba")
-		  b= new BarObject(ProcedureBarCanvas1,615,&c468faf,"aderba")
+		  b= new BarObject(ProcedureBarCanvas1,515,&c468faf,"aderba")
 		  lbProcs.RowTagAt(lbProcs.LastAddedRowIndex)=b
 		  
-		  // add the row in the listbox
+		  // init some things for the procbar
+		  ProcedureBarCanvas1.Init
 		  
-		  // store this bar object in the rowtag
 		  
 		End Sub
 	#tag EndEvent
@@ -627,6 +650,62 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events lblBarVal
+	#tag Event
+		Function ContextualMenuItemSelected(selectedItem As DesktopMenuItem) As Boolean
+		  var sel as string = selectedItem.Text
+		  
+		  var time as string = sel.Right(1)
+		  var base as string = sel.left(sel.Length-1)
+		  var secs as integer
+		  select case time
+		  case "h"
+		    secs = base.ToInteger*3600
+		  case "d"
+		    secs = base.ToInteger*85400
+		  case "w"
+		    secs = base.ToInteger*604800
+		  case "m"
+		    secs = base.ToInteger*2419200
+		  end select
+		  
+		  me.Text=sel
+		  
+		  wndMain.ProcedureBarCanvas1.BarSecs=secs
+		  
+		  
+		  
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function ConstructContextualMenu(base As DesktopMenuItem, x As Integer, y As Integer) As Boolean
+		  var t() as string = ProcedureBarCanvas1.timesarray
+		  if t<>Nil then
+		    var s as string
+		    var menuitemname as String
+		    for i as integer = 0 to t.Count-1
+		      s=t(i)
+		      s=s.ReplaceAll(chr(34),"")
+		      base.AddMenu(New MenuItem(s))
+		    next
+		  else
+		    base.AddMenu(New MenuItem("1d"))
+		    base.AddMenu(New MenuItem("2d"))
+		    base.AddMenu(New MenuItem("3d"))
+		    base.AddMenu(New MenuItem("4d"))
+		    base.AddMenu(New MenuItem("5d"))
+		    base.AddMenu(New MenuItem("6d"))
+		    base.AddMenu(New MenuItem("1w"))
+		    base.AddMenu(New MenuItem("2w"))
+		    base.AddMenu(New MenuItem("3w"))
+		    base.AddMenu(New MenuItem("1m"))
+		  end if
+		  
+		  return true
+		End Function
+	#tag EndEvent
+#tag EndEvents
 #tag Events lbProcs
 	#tag Event
 		Function DragReorderRows(newPosition as Integer, parentRow as Integer) As Boolean
@@ -663,6 +742,24 @@ End
 		Sub Pressed()
 		  for i as integer = 0 to lbProcs.RowCount-1
 		    ProcedureBarCanvas1.AddBar(lbProcs.RowTagAt(i))
+		  next
+		  ProcedureBarCanvas1.Refresh(true)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events UpDownArrows1
+	#tag Event
+		Sub DownPressed()
+		  for each bo as BarObject in ProcedureBarCanvas1.mBarObjects
+		    bo.secs=bo.secs/2
+		  next
+		  ProcedureBarCanvas1.Refresh(true)
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub UpPressed()
+		  for each bo as BarObject in ProcedureBarCanvas1.mBarObjects
+		    bo.secs=bo.secs*2
 		  next
 		  ProcedureBarCanvas1.Refresh(true)
 		End Sub

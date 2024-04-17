@@ -5,20 +5,14 @@ Inherits DesktopCanvas
 		Sub Paint(g As Graphics, areas() As Rect)
 		  #PRAGMA unused areas
 		  
-		  // this double loop gets the right index order for drawing
+		  // first make sure our scale is appropriate
+		  ScaleBars
+		  
+		  // this loop gets the right index order for drawing from the listbox
 		  var lft as integer = me.Left
 		  mLastX=0
-		  'var placementcounter as integer = 0
 		  var right as integer = 0
 		  For Each bo As BarObject In mBarObjects
-		    'for each b as BarObject in mBarObjects
-		    'if b.index = placementcounter then
-		    'right = b .Draw(g,mLastX,0)
-		    'mLastX = mLastX+right
-		    'placementcounter=placementcounter+1
-		    'exit for
-		    'end if
-		    'next
 		    right = bo.Draw(g,mLastX,0)
 		    mLastX = mLastX+right
 		  Next
@@ -32,8 +26,45 @@ Inherits DesktopCanvas
 		  'var pct as Double = secs/Timeframe
 		  
 		  me.mBarObjects.Add(b)
+		  Redraw
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub adjustbarsecs(direction as Boolean)
+		  var currentbartime as string = wndMain.lblBarVal.Text
+		  var curtimeindex as integer = timesarray.IndexOf(currentbartime)
+		  var nextimeval as string
+		  if direction then
+		    nextimeval = timesarray(curtimeindex+1)
+		    barsecs=SecsFromDuration(nextimeval)
+		  else
+		    nextimeval = timesarray(curtimeindex-1)
+		    barsecs=SecsFromDuration(nextimeval)
+		  end if
+		  for each bo as BarObject in mBarObjects
+		    bo.Timeframe=barsecs
+		  next
 		  
-		  'Redraw
+		  wndMain.lblBarVal.Text=nextimeval
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Init()
+		  var t() as String = timesarray
+		  t=Array("1h","2h","3h","4h","5h","6h","8h","12h","14h",_
+		  "18h","22h","1d","2d","3d","4d","5d","6d","1w","2w","3w","1m")
+		  timesarray=t
+		  timesdict = new Dictionary
+		  var s as string
+		  for i as integer = 0 to t.Count-1
+		    s=t(i)
+		    timesdict.Value(s)=SecsFromDuration(s)
+		    currentduration="1h"
+		  next
+		  
+		  wndMain.lblBarVal.Text="1h"
 		End Sub
 	#tag EndMethod
 
@@ -43,13 +74,26 @@ Inherits DesktopCanvas
 		  'var pct as Double = secs/Timeframe
 		  var b as new BarObject(me,secs,c,cap)
 		  me.mBarObjects.Add(b)
+		  Redraw
 		  
 		  
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub Redraw()
+	#tag Method, Flags = &h21
+		Private Function pctsTotal() As integer
+		  var t as integer
+		  
+		  for each bo as BarObject in mBarObjects
+		    t=t+bo.Percentage*100
+		  next
+		  
+		  return t
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub Redraw()
 		  Refresh(False)
 		End Sub
 	#tag EndMethod
@@ -85,17 +129,87 @@ Inherits DesktopCanvas
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub ScaleBars()
+		  // set all bars to current timeframe
+		  
+		  
+		  // get the total % for all bars
+		  var percentagetotal as integer = pctsTotal
+		  
+		  #If DebugBuild
+		    var go as Boolean=SecsFromDuration(currentduration)*(percentagetotal/100)>3600
+		  #Endif
+		  
+		  // only do this if we've passed one hour of duration - the lowest duration
+		  If SecsFromDuration(currentduration)*(percentagetotal/100)>3600 then
+		    // should we expand or constrict the bars view
+		    var max as integer = timesdict.KeyCount-1
+		    var cnt as integer = 0
+		    // but not if we pass either low or high boundary
+		    while percentagetotal<60 or percentagetotal>90 and cnt<max
+		      if 100-percentagetotal<60 then adjustbarsecs(true) else adjustbarsecs(false) 
+		      // reset our cals
+		      'calcdicts.RemoveAll
+		      percentagetotal = pctsTotal
+		      cnt=cnt+1
+		    wend
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function SecsFromDuration(dur as string) As integer
+		  var time as string = dur.Right(1)
+		  var base as string = dur.left(dur.Length-1)
+		  var secs as integer
+		  select case time
+		  case "h"
+		    secs = base.ToInteger*3600
+		  case "d"
+		    secs = base.ToInteger*86400
+		  case "w"
+		    secs = base.ToInteger*604800
+		  case "m"
+		    secs = base.ToInteger*2419200
+		  end select
+		  
+		  currentduration=dur
+		  wndMain.lblBarVal.Text=dur
+		  
+		  return secs
+		End Function
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h0
 		Background As Picture
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		mBarObjects() As BarObject
+		barsecs As Integer = 3600
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private currentduration As string = "1h"
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		mLastX As Integer
+		mBarObjects() As BarObject
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mLastX As Integer
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		timesarray() As string
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		timesdict As Dictionary
 	#tag EndProperty
 
 
@@ -293,10 +407,10 @@ Inherits DesktopCanvas
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="mLastX"
+			Name="barsecs"
 			Visible=false
 			Group="Behavior"
-			InitialValue=""
+			InitialValue="3600"
 			Type="Integer"
 			EditorType=""
 		#tag EndViewProperty
