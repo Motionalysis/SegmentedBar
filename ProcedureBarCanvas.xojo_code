@@ -27,10 +27,21 @@ Inherits DesktopCanvas
 
 
 	#tag Method, Flags = &h0
-		Sub AddBar(idx As integer, pct As double, Optional c As color = &cff0000, Optional cap As String = "")
+		Sub AddBar(b as BarObject)
 		  // Adds a new bar to the canvas and selects it.
+		  'var pct as Double = secs/Timeframe
 		  
-		  var b as new BarObject(me,idx,pct,c,cap)
+		  me.mBarObjects.Add(b)
+		  
+		  'Redraw
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub MakeNewBar(idx As integer, secs As integer, Optional c As color = &cff0000, Optional cap As String = "")
+		  // Adds a new bar to the canvas and selects it.
+		  'var pct as Double = secs/Timeframe
+		  var b as new BarObject(me,secs,c,cap)
 		  me.mBarObjects.Add(b)
 		  
 		  
@@ -40,6 +51,14 @@ Inherits DesktopCanvas
 	#tag Method, Flags = &h0
 		Sub Redraw()
 		  Refresh(False)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub RemoveAllBars()
+		  For i As Integer = mBarObjects.Count-1 DownTo 0
+		    RemoveObject(i)
+		  Next
 		End Sub
 	#tag EndMethod
 

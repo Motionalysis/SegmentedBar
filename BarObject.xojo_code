@@ -1,10 +1,9 @@
 #tag Class
 Protected Class BarObject
 	#tag Method, Flags = &h0
-		Sub Constructor(cvs As DesktopCanvas, idx As integer, pct As double, Optional c As color = &cff0000, Optional cap As String = "")
+		Sub Constructor(cvs As DesktopCanvas, scs As integer, Optional c As color = &cff0000, Optional cap As String = "")
 		  myCanvas=new WeakRef(cvs)
-		  index=idx
-		  percentage=pct/100
+		  Secs=scs
 		  fillcolor=c
 		  Caption=cap
 		  
@@ -64,6 +63,14 @@ Protected Class BarObject
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mPercentage As Double = 25
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mTimeframe As Integer = 3600
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private myCanvas As WeakRef
 	#tag EndProperty
 
@@ -71,9 +78,21 @@ Protected Class BarObject
 		Private ParentWindow As DesktopWindow
 	#tag EndProperty
 
-	#tag Property, Flags = &h21
-		Private percentage As Double = 25
-	#tag EndProperty
+	#tag ComputedProperty, Flags = &h21
+		#tag Getter
+			Get
+			  mPercentage = Secs/Timeframe
+			  
+			  Return mPercentage
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mPercentage = value
+			End Set
+		#tag EndSetter
+		Private Percentage As Double
+	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
@@ -82,6 +101,24 @@ Protected Class BarObject
 			End Get
 		#tag EndGetter
 		RIght As Integer
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h0
+		Secs As Integer
+	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Return mtimeframe
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mtimeframe = value
+			End Set
+		#tag EndSetter
+		Timeframe As Integer
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0

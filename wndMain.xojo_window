@@ -10,7 +10,7 @@ Begin DesktopWindow wndMain
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   282
+   Height          =   247
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -32,7 +32,7 @@ Begin DesktopWindow wndMain
       Backdrop        =   0
       Background      =   0
       Enabled         =   True
-      Height          =   100
+      Height          =   75
       Index           =   -2147483648
       Left            =   20
       LockBottom      =   False
@@ -49,9 +49,9 @@ Begin DesktopWindow wndMain
       Top             =   20
       Transparent     =   True
       Visible         =   True
-      Width           =   660
+      Width           =   633
    End
-   Begin DesktopButton Button1
+   Begin DesktopButton btnAdd
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -64,7 +64,7 @@ Begin DesktopWindow wndMain
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   600
+      Left            =   573
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
@@ -76,7 +76,7 @@ Begin DesktopWindow wndMain
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   242
+      Top             =   207
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -94,7 +94,7 @@ Begin DesktopWindow wndMain
       Index           =   -2147483648
       InitialValue    =   "duuuh\nderrba\nadoiee\naderba"
       Italic          =   False
-      Left            =   20
+      Left            =   -86
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -106,13 +106,13 @@ Begin DesktopWindow wndMain
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   135
+      Top             =   132
       Transparent     =   False
       Underline       =   False
-      Visible         =   True
-      Width           =   94
+      Visible         =   False
+      Width           =   74
    End
-   Begin DesktopButton Button2
+   Begin DesktopButton btnDelete
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -125,7 +125,7 @@ Begin DesktopWindow wndMain
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   508
+      Left            =   389
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
@@ -137,7 +137,384 @@ Begin DesktopWindow wndMain
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   242
+      Top             =   205
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
+   Begin ColorSelect ColorSelect1
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowFocusRing  =   True
+      AllowTabs       =   False
+      Backdrop        =   0
+      Enabled         =   True
+      Height          =   22
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   578
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Scope           =   0
+      SelectedColor   =   &c00000000
+      TabIndex        =   4
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   107
+      Transparent     =   True
+      Visible         =   True
+      Width           =   75
+   End
+   Begin DesktopLabel Label1
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   522
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   5
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Color:"
+      TextAlignment   =   3
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   107
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   44
+   End
+   Begin DesktopLabel Label2
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   513
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   6
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Caption:"
+      TextAlignment   =   3
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   141
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   53
+   End
+   Begin DesktopTextField tfCaption
+      AllowAutoDeactivate=   True
+      AllowFocusRing  =   True
+      AllowSpellChecking=   False
+      AllowTabs       =   False
+      BackgroundColor =   &cFFFFFF
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Format          =   ""
+      HasBorder       =   True
+      Height          =   22
+      Hint            =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   578
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MaximumCharactersAllowed=   0
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   2
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextAlignment   =   0
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   141
+      Transparent     =   False
+      Underline       =   False
+      ValidationMask  =   ""
+      Visible         =   True
+      Width           =   75
+   End
+   Begin DesktopLabel Label3
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   513
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   8
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Time:"
+      TextAlignment   =   3
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   173
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   53
+   End
+   Begin DesktopTextField tfTime
+      AllowAutoDeactivate=   True
+      AllowFocusRing  =   True
+      AllowSpellChecking=   False
+      AllowTabs       =   False
+      BackgroundColor =   &cFFFFFF
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Format          =   ""
+      HasBorder       =   True
+      Height          =   22
+      Hint            =   ""
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   578
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MaximumCharactersAllowed=   0
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   2
+      TabIndex        =   9
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextAlignment   =   0
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   173
+      Transparent     =   False
+      Underline       =   False
+      ValidationMask  =   ""
+      Visible         =   True
+      Width           =   75
+   End
+   Begin DesktopLabel Label4
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   660
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "1h"
+      TextAlignment   =   2
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   47
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   31
+   End
+   Begin DesktopListBox lbProcs
+      AllowAutoDeactivate=   True
+      AllowAutoHideScrollbars=   True
+      AllowExpandableRows=   False
+      AllowFocusRing  =   True
+      AllowResizableColumns=   False
+      AllowRowDragging=   True
+      AllowRowReordering=   True
+      Bold            =   False
+      ColumnCount     =   1
+      ColumnWidths    =   ""
+      DefaultRowHeight=   -1
+      DropIndicatorVisible=   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      GridLineStyle   =   0
+      HasBorder       =   True
+      HasHeader       =   True
+      HasHorizontalScrollbar=   False
+      HasVerticalScrollbar=   True
+      HeadingIndex    =   0
+      Height          =   120
+      Index           =   -2147483648
+      InitialValue    =   "Procedure"
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      RequiresSelection=   False
+      RowSelectionType=   0
+      Scope           =   0
+      TabIndex        =   11
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   107
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   171
+      _ScrollWidth    =   -1
+   End
+   Begin DesktopButton btnReAdd
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Re-Add"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   389
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   12
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   173
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
+   Begin DesktopButton btnDeleteAll
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Delete All"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   297
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   13
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   205
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
+   Begin DesktopButton btnReAddAll
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Re-Add All"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   297
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   14
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   173
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -155,25 +532,64 @@ End
 
 	#tag Event
 		Sub Opening()
-		  ProcedureBarCanvas1.AddBar(0,25,&c61a5c2,"duhhh")
-		  ProcedureBarCanvas1.AddBar(2,25,&c2c7da0,"aderrr")
-		  ProcedureBarCanvas1.AddBar(3,25,&c2a6f97,"doiee")
-		  ProcedureBarCanvas1.AddBar(1,25,&c468faf,"aderba")
+		  ProcedureBarCanvas1.MakeNewBar(0,565,&c61a5c2,"duhhh")
+		  lbProcs.AddRow("duhhh")
+		  var b as new BarObject(ProcedureBarCanvas1,565,&c61a5c2,"duhhh")
+		  lbProcs.RowTagAt(lbProcs.LastAddedRowIndex)=b
+		  ProcedureBarCanvas1.MakeNewBar(2,348,&c2c7da0,"aderrr")
+		  lbProcs.AddRow("aderrr")
+		  b= new BarObject(ProcedureBarCanvas1,348,&c2c7da0,"aderrr")
+		  lbProcs.RowTagAt(lbProcs.LastAddedRowIndex)=b
+		  ProcedureBarCanvas1.MakeNewBar(3,866,&c2a6f97,"doiee")
+		  lbProcs.AddRow("doiee")
+		  b= new BarObject(ProcedureBarCanvas1,866,&c2a6f97,"doiee")
+		  lbProcs.RowTagAt(lbProcs.LastAddedRowIndex)=b
+		  ProcedureBarCanvas1.MakeNewBar(1,615,&c468faf,"aderba")
+		  lbProcs.AddRow("aderba")
+		  b= new BarObject(ProcedureBarCanvas1,615,&c468faf,"aderba")
+		  lbProcs.RowTagAt(lbProcs.LastAddedRowIndex)=b
+		  
+		  // add the row in the listbox
+		  
+		  // store this bar object in the rowtag
+		  
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
 		Sub Add()
+		  var c as color = ColorSelect1.SelectedColor
+		  var cap as string = tfCaption.Text
+		  var t as integer = tfTime.Text.ToInteger
+		  
+		  // add the bar itself
+		  ProcedureBarCanvas1.MakeNewBar(0,t,c,cap)
+		  
+		  // add the row in the listbox
+		  lbProcs.AddRow(cap)
+		  // store this bar object in the rowtag
+		  var b as new BarObject(ProcedureBarCanvas1,t,c,cap)
+		  lbProcs.RowTagAt(lbProcs.LastAddedRowIndex)=b
+		  
+		  // redraw the control
+		  ProcedureBarCanvas1.Refresh(true)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Add4()
 		  select case rgBars.SelectedIndex
 		  case 0
-		    ProcedureBarCanvas1.AddBar(0,25,&c61a5c2,"duhhh")
+		    ProcedureBarCanvas1.MakeNewBar(0,25,&c61a5c2,"duhhh")
 		  case 1
-		    ProcedureBarCanvas1.AddBar(1,25,&c468faf,"aderba")
+		    ProcedureBarCanvas1.MakeNewBar(1,25,&c468faf,"aderba")
 		  case 2
-		    ProcedureBarCanvas1.AddBar(2,25,&c2c7da0,"aderrr")
+		    ProcedureBarCanvas1.MakeNewBar(2,25,&c2c7da0,"aderrr")
 		  case 3
-		    ProcedureBarCanvas1.AddBar(3,25,&c2a6f97,"doiee")
+		    ProcedureBarCanvas1.MakeNewBar(3,25,&c2a6f97,"doiee")
 		  end select
 		  
 		  ProcedureBarCanvas1.Refresh(true)
@@ -182,7 +598,9 @@ End
 
 	#tag Method, Flags = &h0
 		Sub Delete()
-		  ProcedureBarCanvas1.RemoveObject(rgBars.SelectedIndex)
+		  'ProcedureBarCanvas1.RemoveObject(rgBars.SelectedIndex)
+		  
+		  ProcedureBarCanvas1.RemoveObject(lbProcs.SelectedRowIndex)
 		  
 		End Sub
 	#tag EndMethod
@@ -195,17 +613,58 @@ End
 
 #tag EndWindowCode
 
-#tag Events Button1
+#tag Events btnAdd
 	#tag Event
 		Sub Pressed()
 		  Add
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Button2
+#tag Events btnDelete
 	#tag Event
 		Sub Pressed()
 		  Delete
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events lbProcs
+	#tag Event
+		Function DragReorderRows(newPosition as Integer, parentRow as Integer) As Boolean
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Sub DropObjectOnRow(x As Integer, y As Integer, obj As DragItem, action As Integer, row As Integer, parentRow As Integer, location As DesktopListbox.DropLocations)
+		  // remove all and re-enter
+		  ProcedureBarCanvas1.RemoveAllBars
+		  for i as integer = 0 to lbProcs.RowCount-1
+		    ProcedureBarCanvas1.AddBar(me.RowTagAt(i))
+		  next
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnReAdd
+	#tag Event
+		Sub Pressed()
+		  ProcedureBarCanvas1.AddBar(lbProcs.RowTagAt(lbProcs.SelectedRowIndex))
+		  ProcedureBarCanvas1.Refresh(true)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnDeleteAll
+	#tag Event
+		Sub Pressed()
+		  ProcedureBarCanvas1.RemoveAllBars
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnReAddAll
+	#tag Event
+		Sub Pressed()
+		  for i as integer = 0 to lbProcs.RowCount-1
+		    ProcedureBarCanvas1.AddBar(lbProcs.RowTagAt(i))
+		  next
+		  ProcedureBarCanvas1.Refresh(true)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
